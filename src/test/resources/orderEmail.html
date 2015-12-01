@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>订单信息</title>
+
+</head>
+
+<body>
+<table style = "margin:0 auto;width:1170px;font-size:16px;line-height:2em;" border="0">
+	<tr>
+		<td style="text-align:center;"><a href="" target="_blank"><img src="${productImg!''}" width="270" height="180" alt=""></a></td>
+	</tr>
+	<tr>
+		<td style="font-size:26px;text-align:center; font-weight:normal; color:#666; margin-bottom:20px;">${productName!''}</td>
+	</tr>
+	<tr>
+		<td style="text-align:center;font-size:18px;color:#999;">海淘车价：<span style="color:#f00;">${pricew!''}</span></td>
+	</tr>
+	<tr>
+		<td  style="padding-top:10px;"><table width="80%" style="margin:0 auto;color:#666;">
+				<tr>
+					<td style="font-size:30px; text-align:center; line-height:2em; font-weight:normal; color:#666;">订单信息</td>
+				</tr>
+				<tr>
+					<td style="border-top:1px solid #ddd;padding:10px 0;"><span>订单编号：<span href="" style="color:#666;text-decoration:none;">${orderNo!''}</span></span>&nbsp;&nbsp;&nbsp;<span>订单时间：${orderDate!''}</span></td>
+				</tr>
+				<tr>
+					<td style="border-top:1px solid #ddd;padding:10px 0;">车主姓名：${contactor!''} <br>
+						身份证号：${cardNo!''} <br>
+						手机号码：${phone!''} </td>
+				</tr>
+				
+				<tr>
+			
+					<#if address?? && address != ''>
+					  <td style="border-top:1px solid #ddd;padding:10px 0;">门店地址：${address!''}</td>
+					</#if>
+					
+					<#if otherAddress?? && otherAddress != ''>
+					  <td style="border-top:1px solid #ddd;padding:10px 0;">所在城市：${otherAddress!''}</td>
+					</#if>
+					
+				</tr>
+			</table></td>
+	</tr>
+	<tr>
+		<td  style="padding-top:10px;"><table width="80%" style="margin:0 auto;color:#666;">
+				<tr>
+					<td colspan="2" style="font-size:30px; text-align:center; line-height:2em; font-weight:normal; color:#666;">费用信息</td>
+				</tr>
+				<tr>
+					<td colspan="2" style="border-top:1px solid #ddd;padding:10px 0;"><span style="float:right;">裸车价：<b style="color:#f00;font-weight:normal;">${price!''}元</b></span><span>商品名称：<a href="http://www.htche.com/detail/detail/${productId!''}" style="color:#666;text-decoration:none;">${productName!''}</a></td>
+				</tr>
+				<tr>
+					<td colspan="2" style="border-top:1px solid #ddd;padding:10px 0;"><span style="float:right;"><b style="color:#f00;font-weight:normal;">${shipPrice!''}元</b></span>商品运费：${shipDesc!''}</td>
+				</tr>
+				<tr>
+					<td colspan="2" style="border-top:1px solid #ddd;padding:10px 0;"><span style="float:right;"><b style="color:#f00;font-weight:normal;">${guarantPrice!''}元</b></span>质保费用：${guarantDesc!''}</td>
+				</tr>
+				
+				<tr>
+					<td colspan="2" style="padding-top:40px;">总价：<span style="font-weight:bold;"> ${totalPrice!''} </span>元(与购车经纪人确认订单后支付<span style="font-weight:bold;color:#f90;"> 50,000 </span>元，即可发车</span>)</td>
+				</tr>
+				<tr>
+					<td>付款方式：${payType!''}(定金<span style="font-weight:bold;color:#f90;"> 50,000 </span>元，尾款<span style="font-weight:bold;"> ${lastPrice!''} </span>元)</td>
+					<td style="text-align:right">
+						<a href="http://shop.dev.htche.com:8080/htche-shop-order/admin/order/cancel/${orderCode!''}" style="background: #f90;
+						border-color: #f90;color: #fff;display: inline-block;font-size: 18px;
+						padding: 5px 20px;line-height: 2em;border: 1px solid #aaa;">取消订单</a>
+					</td>
+				</tr>
+			</table></td>
+	</tr>
+</table>
+</body>
+</html>
