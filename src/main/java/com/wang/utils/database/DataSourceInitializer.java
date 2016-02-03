@@ -28,6 +28,7 @@ public class DataSourceInitializer extends org.springframework.jdbc.datasource.i
 	@Override
 	public void afterPropertiesSet() {
 		try {
+			logger.debug("SELECT count(*) FROM " + getFlagTableName());
 			jdbcTemplate.execute("SELECT count(*) FROM " + getFlagTableName());
 		}
 		catch (Exception e) {
