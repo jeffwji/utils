@@ -47,7 +47,7 @@ public class DES3 {
 		this.passPhrase = passPhrase;
 		this.salt = salt;
 		if (null != type && 0 != type.trim().length()) {
-			this.type = type;
+			DES3.type = type;
 		}
 
 		if (null == passPhrase) {

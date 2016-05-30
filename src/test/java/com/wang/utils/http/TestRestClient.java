@@ -20,7 +20,7 @@ public class TestRestClient {
 	IRestCrudClient restClient = new RestClient("scheduler", "Scheduler251X69E7");
 
 	@Test
-	public void restClientTest() throws KeyManagementException, ClientProtocolException, NoSuchAlgorithmException,
+	public void restClientTest() throws KeyManagementException, NoSuchAlgorithmException,
 			IOException {
 		StringBuffer sb = new StringBuffer();
 		int status = restClient.get(sb, "http://localhost:8080/htche-web-sms/rest/products");
@@ -28,7 +28,7 @@ public class TestRestClient {
 	}
 
 	@Test
-	public void postFormTest() throws KeyManagementException, ClientProtocolException, NoSuchAlgorithmException,
+	public void postFormTest() throws KeyManagementException, NoSuchAlgorithmException,
 			IOException {
 		final String uri = "http://store.test.htche.com/status.php";
 		//final String uri = "http://localhost:8080/htche-web-sms/rest/changeRequests/0";

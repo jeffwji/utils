@@ -9,21 +9,21 @@ import org.apache.http.client.ClientProtocolException;
 
 public interface IRestCrudClient extends IRestClient {
 
-	public abstract int get(final StringBuffer stream, String uri) throws ClientProtocolException, IOException,
+	int get(final StringBuffer stream, String uri) throws IOException,
 			KeyManagementException, NoSuchAlgorithmException;
 
-	public abstract int post(final StringBuffer stream, String uri, String content, String contentType)
-			throws ClientProtocolException, IOException, KeyManagementException, NoSuchAlgorithmException;
+	int post(final StringBuffer stream, String uri, String content, String contentType)
+			throws IOException, KeyManagementException, NoSuchAlgorithmException;
 
-	public abstract int post(final StringBuffer stream, String uri, Map<String, Object> form)
-			throws ClientProtocolException, IOException, KeyManagementException, NoSuchAlgorithmException;
+	int post(final StringBuffer stream, String uri, Map<String, Object> form)
+			throws IOException, KeyManagementException, NoSuchAlgorithmException;
 
-	public abstract int delete(final StringBuffer stream, String uri) throws ClientProtocolException, IOException,
+	int delete(final StringBuffer stream, String uri) throws IOException,
 			KeyManagementException, NoSuchAlgorithmException;
 
-	public abstract int put(final StringBuffer stream, String uri, String content, String contentType)
-			throws ClientProtocolException, IOException, KeyManagementException, NoSuchAlgorithmException;
+	int put(final StringBuffer stream, String uri, String content, String contentType)
+			throws IOException, KeyManagementException, NoSuchAlgorithmException;
 
-	public abstract int put(final StringBuffer stream, String uri, Map<String, Object> form)
-			throws ClientProtocolException, IOException, KeyManagementException, NoSuchAlgorithmException;
+	int put(final StringBuffer stream, String uri, Map<String, Object> form)
+			throws IOException, KeyManagementException, NoSuchAlgorithmException;
 }
