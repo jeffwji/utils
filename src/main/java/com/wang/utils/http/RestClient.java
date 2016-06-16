@@ -108,7 +108,7 @@ public class RestClient implements IRestCrudClient {
 	 * @see com.wang.utils.http.IRestCRUDClient#get(java.lang.String, boolean)
 	 */
 	@Override
-	public int get(final StringBuffer stream, String uri) throws ClientProtocolException, IOException,
+	public int get(final StringBuffer stream, String uri) throws IOException,
 			KeyManagementException, NoSuchAlgorithmException {
 		return request(stream, uri, null, null, HTTP_OPERATION_GET, null);
 	}
@@ -118,7 +118,7 @@ public class RestClient implements IRestCrudClient {
 	 */
 	@Override
 	public int post(final StringBuffer stream, String uri, String content, String contentType)
-			throws ClientProtocolException, IOException, KeyManagementException, NoSuchAlgorithmException {
+			throws IOException, KeyManagementException, NoSuchAlgorithmException {
 		return request(stream, uri, content, contentType, HTTP_OPERATION_POST, null);
 	}
 
@@ -126,7 +126,7 @@ public class RestClient implements IRestCrudClient {
 	 * @see com.wang.utils.http.IRestCRUDClient#delete(java.lang.String, boolean)
 	 */
 	@Override
-	public int delete(final StringBuffer stream, String uri) throws ClientProtocolException, IOException,
+	public int delete(final StringBuffer stream, String uri) throws IOException,
 			KeyManagementException, NoSuchAlgorithmException {
 		return request(stream, uri, null, null, HTTP_OPERATION_DELETE, null);
 	}
@@ -136,23 +136,23 @@ public class RestClient implements IRestCrudClient {
 	 */
 	@Override
 	public int put(final StringBuffer stream, String uri, String content, String contentType)
-			throws ClientProtocolException, IOException, KeyManagementException, NoSuchAlgorithmException {
+			throws IOException, KeyManagementException, NoSuchAlgorithmException {
 		return request(stream, uri, content, contentType, HTTP_OPERATION_PUT, null);
 	}
 
 	@Override
-	public int post(StringBuffer stream, String uri, Map<String, Object> form) throws ClientProtocolException,
+	public int post(StringBuffer stream, String uri, Map<String, Object> form) throws
 			IOException, KeyManagementException, NoSuchAlgorithmException {
 		return request(stream, uri, form, HTTP_OPERATION_POST, null);
 	}
 
 	@Override
-	public int put(StringBuffer stream, String uri, Map<String, Object> form) throws ClientProtocolException,
+	public int put(StringBuffer stream, String uri, Map<String, Object> form) throws
 			IOException, KeyManagementException, NoSuchAlgorithmException {
 		return request(stream, uri, form, HTTP_OPERATION_PUT, null);
 	}
 
-	public int request(final StringBuffer stream, HttpUriRequest httpUriRequest) throws ClientProtocolException,
+	public int request(final StringBuffer stream, HttpUriRequest httpUriRequest) throws
 			IOException, KeyManagementException, NoSuchAlgorithmException {
 		if (null == httpClient) {
 			initRestClient();
@@ -160,7 +160,7 @@ public class RestClient implements IRestCrudClient {
 
 		ResponseHandler<Integer> requestHandler = new ResponseHandler<Integer>() {
 			//@Override
-			public Integer handleResponse(HttpResponse response) throws ClientProtocolException, IOException {
+			public Integer handleResponse(HttpResponse response) throws IOException {
 				Integer statusCode = response.getStatusLine().getStatusCode();
 				HttpEntity entity = response.getEntity();
 				if (null != entity) {
@@ -181,7 +181,7 @@ public class RestClient implements IRestCrudClient {
 
 	@Override
 	public synchronized int request(final StringBuffer stream, String uri, String content, String contentType,
-			String method, String acceptType) throws ClientProtocolException, IOException, KeyManagementException,
+			String method, String acceptType) throws IOException, KeyManagementException,
 			NoSuchAlgorithmException {
 		setSecure(uri);
 
@@ -200,7 +200,7 @@ public class RestClient implements IRestCrudClient {
 
 	@Override
 	public synchronized int request(StringBuffer stream, String uri, Map<String, Object> form, String method,
-			String acceptType) throws ClientProtocolException, IOException, KeyManagementException,
+			String acceptType) throws IOException, KeyManagementException,
 			NoSuchAlgorithmException {
 		setSecure(uri);
 		HttpUriRequest httpUriRequest = generateHttpRequest(uri, method, acceptType);
@@ -227,7 +227,7 @@ public class RestClient implements IRestCrudClient {
 		secure = uri.toLowerCase().startsWith("https://");
 	}
 
-	public void processResult(String object, StringBuffer stream) throws UnsupportedEncodingException, IOException {
+	public void processResult(String object, StringBuffer stream) throws IOException {
 		stream.delete(0, stream.length()).append(object);
 	}
 

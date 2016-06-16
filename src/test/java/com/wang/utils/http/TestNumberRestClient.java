@@ -20,7 +20,7 @@ public class TestNumberRestClient {
 
 
 	@Test
-	public void postFormTest() throws KeyManagementException, ClientProtocolException, NoSuchAlgorithmException,
+	public void postFormTest() throws KeyManagementException, NoSuchAlgorithmException,
 			IOException {
 		final String uri = "http://store.test.htche.com/number.php";
 		//final String uri = "http://localhost:8080/htche-web-sms/rest/changeRequests/0";
