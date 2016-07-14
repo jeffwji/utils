@@ -19,9 +19,9 @@
 		
 		<context:property-placeholder location="classpath:test.properties" />
 		
-		<bean id="mailSender" class="com.wang.utils.mail.MailBroker">
+		<bean id="mailSender" class="net.tinybrick.utils.mail.MailBroker">
 			<constructor-arg>
-				<bean class="com.wang.utils.mail.MailConfig">
+				<bean class="net.tinybrick.utils.mail.MailConfig">
 					<constructor-arg index="0">
 						<value>${mail.server.host}</value>
 					</constructor-arg>
