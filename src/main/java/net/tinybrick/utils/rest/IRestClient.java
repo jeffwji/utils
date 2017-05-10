@@ -7,9 +7,15 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.util.MultiValueMap;
 
 public interface IRestClient {
-	String getUsername();
+	public enum AUTHENTICATION_METHOD{
+		Basic,
+		Bearer
+	}
 
+	AUTHENTICATION_METHOD getAuthenticationMethod();
+	String getUsername();
 	String getPassword();
+	String getBearer();
 
 	<T> ResponseEntity<T> get(String url) throws Exception;
 

@@ -29,15 +29,26 @@ import org.springframework.web.client.RestTemplate;
 import net.tinybrick.utils.crypto.Codec;
 
 public class RestClient implements IRestClient {
+	AUTHENTICATION_METHOD default_auth_method = AUTHENTICATION_METHOD.Basic;
 
 	@Override
 	public String getUsername() {
 		return null;
 	}
-
 	@Override
 	public String getPassword() {
 		return null;
+	}
+	@Override
+	public String getBearer() {
+		return null;
+	}
+	@Override
+	public AUTHENTICATION_METHOD getAuthenticationMethod(){
+		return default_auth_method;
+	}
+	public void setAuthenticationMethod(AUTHENTICATION_METHOD method){
+		default_auth_method = method;
 	}
 
 	protected String encrypt(String str) throws Exception {
@@ -91,8 +102,13 @@ public class RestClient implements IRestClient {
 
 	private HttpEntity<?> getHttpEntity(MultiValueMap<String, String> form) throws Exception {
 		HttpHeaders headers = new HttpHeaders();
-		if (null != getUsername() && null != getPassword()) {
+
+
+		if (getAuthenticationMethod() == AUTHENTICATION_METHOD.Basic) {
 			headers.add("Authorization", "Basic " + encrypt(getUsername() + ":" + getPassword()));
+		}
+		else if(getAuthenticationMethod() == AUTHENTICATION_METHOD.Bearer) {
+			headers.add("Authorization", "Bearer " + getBearer());
 		}
 
 		if (null != form) {
