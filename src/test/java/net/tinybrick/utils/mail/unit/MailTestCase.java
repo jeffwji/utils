@@ -12,8 +12,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import net.tinybrick.utils.crypto.shop.ShopDesUtil;
-
 @ContextConfiguration(locations = { "classpath:applicationContext-test.xml" })
 @RunWith(SpringJUnit4ClassRunner.class)
 public class MailTestCase {
@@ -44,37 +42,4 @@ public class MailTestCase {
 		mailBroker.send(compose, 0);
 		return;
 	}
-
-	@Test
-	public void orderMail() throws MessagingException {
-		EmailHtml bean = new EmailHtml();
-		bean.setAddress("");
-		bean.setProductName("2015款路虎揽胜HSE版汽油版欧洲版 黑色/黑色");
-		bean.setOtherAddress("成都市");
-		bean.setCardNo("431227197801012366");
-		bean.setContactor("王小二");
-		bean.setGuarantDesc("海淘无忧A套餐");
-		bean.setGuarantPrice("8,700");
-		bean.setLastPrice(" 1,704,000");
-		bean.setOrderDate("2015-05-30");
-		bean.setOrderNo("1233214646");
-		bean.setPayType("全款购车");
-		bean.setOrderCode(ShopDesUtil.encryptOrderInfo(1L, "201505302301001101", 1L));
-		String templatePath = this.getClass().getResource("/").getPath();
-		try {
-			String html = FreemarkerUtil.getEmailTemplate(templatePath, "orderEmail.html", bean);
-			Compose compose = new Compose();
-			compose.setFrom("tester@htche.com");
-			compose.setTo(Arrays.asList("liuhongbin@htche.net"));
-			compose.setSubject("订单邮件测试");
-			compose.setContent(html);
-			mailBroker.send(compose, 1);
-			return;
-
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-	}
-
 }
