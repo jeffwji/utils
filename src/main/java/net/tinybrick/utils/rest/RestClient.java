@@ -29,7 +29,7 @@ import org.springframework.web.client.RestTemplate;
 import net.tinybrick.utils.crypto.Codec;
 
 public class RestClient implements IRestClient {
-	AUTHENTICATION_METHOD default_auth_method = AUTHENTICATION_METHOD.Basic;
+	AUTHENTICATION_METHOD default_auth_method = null;
 
 	@Override
 	public String getUsername() {
@@ -102,7 +102,6 @@ public class RestClient implements IRestClient {
 
 	private HttpEntity<?> getHttpEntity(MultiValueMap<String, String> form) throws Exception {
 		HttpHeaders headers = new HttpHeaders();
-
 
 		if (getAuthenticationMethod() == AUTHENTICATION_METHOD.Basic) {
 			headers.add("Authorization", "Basic " + encrypt(getUsername() + ":" + getPassword()));
