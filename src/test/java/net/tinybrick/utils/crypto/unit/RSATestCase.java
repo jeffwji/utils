@@ -31,7 +31,8 @@ public class RSATestCase {
 
     @Test
     public void testRSAKeys() {
-        String message = "Hello RSA!";
+        String message = "Hello RSA!Hello RSA!Hello RSA!Hello RSA!Hello RSA!Hello RSA!Hello RSA!Hello RSA!Hello RSA!Hello RSA!Hello RSA!Hello RSA!Hello RSA!Hello RSA!Hello RSA!Hello RSA!Hello RSA!Hello RSA!Hello RSA!Hello RSA!Hello RSA!Hello RSA!Hello RSA!Hello RSA! Final Hello!";
+        //String message = "Hello RSA!";
         try {
             byte[][] keys = RSA.generateKeyPair(keyLength);
 
@@ -45,9 +46,28 @@ public class RSATestCase {
         } catch (NoSuchAlgorithmException e) {
             logger.error(e.getMessage(), e);
         } catch (UnsupportedEncodingException e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
         } catch (Exception e) {
-            e.printStackTrace();
+            logger.error(e.getMessage(), e);
+        }
+    }
+
+    @Test
+    public void testVerify() {
+        String message = "Hello RSA!";
+        try {
+            byte[][] keys = RSA.generateKeyPair(keyLength);
+
+            byte[] encoded = RSA.sign(message.getBytes("UTF-8"), keys[1]);
+            System.out.println("Signature for the message is: " + Codec.toBase64(encoded));
+
+            Assert.assertTrue(RSA.verify(message.getBytes(), encoded, keys[0]));
+        } catch (NoSuchAlgorithmException e) {
+            logger.error(e.getMessage(), e);
+        } catch (UnsupportedEncodingException e) {
+            logger.error(e.getMessage(), e);
+        } catch (Exception e) {
+            logger.error(e.getMessage(), e);
         }
     }
 }
