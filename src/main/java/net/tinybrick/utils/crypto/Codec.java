@@ -4,12 +4,10 @@ import java.io.IOException;
 import java.io.UnsupportedEncodingException;
 import java.nio.charset.Charset;
 
+import com.fasterxml.jackson.databind.*;
 import org.apache.commons.codec.DecoderException;
 import org.apache.commons.codec.EncoderException;
 import org.apache.commons.codec.binary.Base64;
-import org.codehaus.jackson.map.DeserializationConfig;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.SerializationConfig;
 import org.json.JSONObject;
 
 public class Codec<T> {
@@ -69,7 +67,7 @@ public class Codec<T> {
 	 * @throws EncoderException
 	 */
 	public static final <T> String toJsonString(T object, boolean wrapRoot) {
-		mapper.configure(SerializationConfig.Feature.WRAP_ROOT_VALUE, wrapRoot);
+		mapper.configure(SerializationFeature.WRAP_ROOT_VALUE, wrapRoot);
 
 		try {
 			return mapper.writeValueAsString(object);
@@ -87,7 +85,7 @@ public class Codec<T> {
 	 * @throws DecoderException
 	 */
 	public static final <T> T toObject(String jsonString, Class<T> clazz) {
-		mapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+		mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
 
 		if (null != jsonString && null != clazz) {
 			try {

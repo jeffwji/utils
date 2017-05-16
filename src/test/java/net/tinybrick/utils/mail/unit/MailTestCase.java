@@ -27,7 +27,7 @@ public class MailTestCase {
 		String content = "<table><tr><td><img src=\"http://sms.semi.htche.com/images/logo/logo2.png\" alt=\"logo\" width=\"340\"></td></tr>"
 				+ "</table>";
 		compose.setContent(content);
-		mailBroker.send(compose, 1);
+		//mailBroker.send(compose, 1);
 		return;
 	}
 
@@ -39,7 +39,7 @@ public class MailTestCase {
 		compose.setSubject("测试");
 		String content = "测试纯文本各式邮件";
 		compose.setContent(content);
-		mailBroker.send(compose, 0);
+		//mailBroker.send(compose, 0);
 		return;
 	}
 }

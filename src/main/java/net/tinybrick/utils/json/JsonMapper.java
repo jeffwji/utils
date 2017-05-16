@@ -12,15 +12,11 @@ import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
 
+import com.fasterxml.jackson.databind.*;
 import org.apache.commons.lang3.StringUtils;
-import org.codehaus.jackson.JsonNode;
-import org.codehaus.jackson.JsonProcessingException;
-import org.codehaus.jackson.map.DeserializationConfig;
-import org.codehaus.jackson.map.ObjectMapper;
-import org.codehaus.jackson.map.SerializationConfig;
-import org.codehaus.jackson.map.annotate.JsonSerialize.Inclusion;
-import org.codehaus.jackson.map.util.JSONPObject;
-import org.codehaus.jackson.type.JavaType;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.annotation.JsonInclude.Include;
+import com.fasterxml.jackson.databind.util.JSONPObject;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -34,50 +30,49 @@ public class JsonMapper {
 
     private ObjectMapper mapper;
 
-    public JsonMapper(Inclusion inclusion) {
+    public JsonMapper(Include inclusion) {
         mapper = new ObjectMapper();
         //设置输出时包含属性的风格
         mapper.setSerializationInclusion(inclusion);
         //设置输入时忽略在JSON字符串中存在但Java对象实际没有的属性
-        mapper.configure(DeserializationConfig.Feature.FAIL_ON_UNKNOWN_PROPERTIES, false);
+        mapper.configure(DeserializationFeature.FAIL_ON_UNKNOWN_PROPERTIES, false);
         //禁止使用int代表Enum的order()來反序列化Enum,非常危險
-        mapper.configure(DeserializationConfig.Feature.FAIL_ON_NUMBERS_FOR_ENUMS, true);
+        mapper.configure(DeserializationFeature.FAIL_ON_NUMBERS_FOR_ENUMS, true);
     }
 
     /**
      * 创建输出全部属性到Json字符串的Mapper.
      */
     public static JsonMapper buildNormalMapper() {
-        return new JsonMapper(Inclusion.ALWAYS);
+        return new JsonMapper(Include.ALWAYS);
     }
 
     /**
      * 创建只输出非空属性到Json字符串的Mapper.
      */
     public static JsonMapper buildNonNullMapper() {
-        return new JsonMapper(Inclusion.NON_NULL);
+        return new JsonMapper(Include.NON_NULL);
     }
 
     /**
      * 创建只输出初始值被改变的属性到Json字符串的Mapper.
      */
     public static JsonMapper buildNonDefaultMapper() {
-        return new JsonMapper(Inclusion.NON_DEFAULT);
+        return new JsonMapper(Include.NON_DEFAULT);
     }
 
     /**
      * 创建只输出非Null且非Empty(如List.isEmpty)的属性到Json字符串的Mapper.
      */
     public static JsonMapper buildNonEmptyMapper() {
-        return new JsonMapper(Inclusion.NON_EMPTY);
+        return new JsonMapper(Include.NON_EMPTY);
     }
 
     /**
      * 如果对象为Null, 返回"null".
      * 如果集合为空集合, 返回"[]".
      */
-    public String toJson(Object object) {
-
+    public String toJsonString(Object object) {
         try {
             return mapper.writeValueAsString(object);
         } catch (IOException e) {
@@ -93,7 +88,7 @@ public class JsonMapper {
      * 
      * @see #constructParametricType(Class, Class...)
      */
-    public <T> T fromJson(String jsonString, Class<T> clazz) {
+    public <T> T fromJsonString(String jsonString, Class<T> clazz) {
         if (StringUtils.isEmpty(jsonString)) {
             return null;
         }
@@ -107,21 +102,6 @@ public class JsonMapper {
     }
 
     /**
-     * 异常抛出
-     * 
-     * @param jsonString
-     * @param clazz
-     * @return
-     * @throws Exception
-     */
-    public <T> T fromJsonException(String jsonString, Class<T> clazz) throws Exception {
-        if (StringUtils.isEmpty(jsonString)) {
-            return null;
-        }
-        return mapper.readValue(jsonString, clazz);
-    }
-
-    /**
      * 如果JSON字符串为Null或"null"字符串, 返回Null.
      * 如果JSON字符串为"[]", 返回空集合.
      * 如需读取集合如List/Map, 且不是List<String>这种简单类型时,先使用函數constructParametricType构造类型.
@@ -129,7 +109,7 @@ public class JsonMapper {
      * @see #constructParametricType(Class, Class...)
      */
     @SuppressWarnings("unchecked")
-    public <T> T fromJson(String jsonString, JavaType javaType) {
+    public <T> T fromJsonString(String jsonString, JavaType javaType) {
         if (StringUtils.isEmpty(jsonString)) {
             return null;
         }
@@ -168,8 +148,8 @@ public class JsonMapper {
     /**
      * 輸出JSONP格式數據.
      */
-    public String toJsonP(String functionName, Object object) {
-        return toJson(new JSONPObject(functionName, object));
+    public String toJsonString(String functionName, Object object) {
+        return toJsonString(new JSONPObject(functionName, object));
     }
 
     /**
@@ -178,8 +158,8 @@ public class JsonMapper {
      * 注意本函數一定要在Mapper創建後, 所有的讀寫動作之前調用.
      */
     public void setEnumUseToString(boolean value) {
-        mapper.configure(SerializationConfig.Feature.WRITE_ENUMS_USING_TO_STRING, value);
-        mapper.configure(DeserializationConfig.Feature.READ_ENUMS_USING_TO_STRING, value);
+        mapper.configure(SerializationFeature.WRITE_ENUMS_USING_TO_STRING, value);
+        mapper.configure(DeserializationFeature.READ_ENUMS_USING_TO_STRING, value);
     }
 
     /**
