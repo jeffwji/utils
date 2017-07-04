@@ -6,6 +6,10 @@ import java.security.NoSuchAlgorithmException;
 
 import org.apache.log4j.Logger;
 
+import static net.tinybrick.utils.crypto.DATA_FORMAT.BASE64;
+import static net.tinybrick.utils.crypto.DATA_FORMAT.HEX;
+
+
 public class SHA1 {
 	private static Logger logger = org.apache.log4j.LogManager.getLogger(SHA1.class);
 
@@ -13,7 +17,7 @@ public class SHA1 {
 		return hash(password, false);
 	}
 
-	public static String hash(String password, boolean base64) throws UnsupportedEncodingException {
+	public static Object hash(String password, DATA_FORMAT dataFormat) throws UnsupportedEncodingException {
 		MessageDigest md = null;
 		try {
 			md = MessageDigest.getInstance("SHA1");
@@ -23,18 +27,28 @@ public class SHA1 {
 			throw new RuntimeException(e.getMessage());
 		}
 
-		md.update(password.getBytes());
+		md.update(password.getBytes("UTF-8"));
 
-		String encrypedString = null;
+		Object encrypedData = null;
 		byte[] codec = md.digest();
-		if (base64) {
-			encrypedString = Codec.toBase64(codec);
+		switch (dataFormat) {
+			case RAW:
+				encrypedData = codec;
+				break;
+			case BASE64:
+				encrypedData = Codec.toBase64(codec);
+				break;
+			default:
+			case HEX:
+				encrypedData = bytesToHex(codec);
+				break;
 		}
-		else {
-			encrypedString = bytesToHex(codec);
-		}
+		return encrypedData;
+	}
 
-		return encrypedString;
+	@Deprecated
+	public static String hash(String password, boolean base64) throws UnsupportedEncodingException {
+		return (String) hash(password, base64?BASE64:HEX);
 	}
 
 	protected static String bytesToHex(byte[] data) {
