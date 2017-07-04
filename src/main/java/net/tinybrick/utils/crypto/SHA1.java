@@ -17,7 +17,7 @@ public class SHA1 {
 		return hash(password, false);
 	}
 
-	public static Object hash(String password, DATA_FORMAT dataFormat) throws UnsupportedEncodingException {
+	public static Object hash(byte[] password, DATA_FORMAT dataFormat) throws UnsupportedEncodingException {
 		MessageDigest md = null;
 		try {
 			md = MessageDigest.getInstance("SHA1");
@@ -27,7 +27,7 @@ public class SHA1 {
 			throw new RuntimeException(e.getMessage());
 		}
 
-		md.update(password.getBytes("UTF-8"));
+		md.update(password);
 
 		Object encrypedData = null;
 		byte[] codec = md.digest();
@@ -44,6 +44,11 @@ public class SHA1 {
 				break;
 		}
 		return encrypedData;
+	}
+
+	public static Object hash(String password, DATA_FORMAT dataFormat) throws UnsupportedEncodingException {
+		byte[] pwdBytes = password.getBytes("UTF-8");
+		return hash(pwdBytes, dataFormat);
 	}
 
 	@Deprecated
