@@ -210,6 +210,10 @@ public class RestClient implements IRestClient {
         return keyManagerFactory;
     }
 
+    protected RestTemplate getRestTemplate() throws IOException, CertificateException, NoSuchAlgorithmException, UnrecoverableKeyException, InvalidKeyException, InvalidAlgorithmParameterException, NoSuchPaddingException, InvalidKeySpecException, KeyManagementException {
+        return getRestTemplate(false);
+    }
+
     protected RestTemplate getRestTemplate(boolean tlsEnabled) throws IOException, CertificateException, NoSuchAlgorithmException, UnrecoverableKeyException, InvalidKeyException, InvalidAlgorithmParameterException, NoSuchPaddingException, InvalidKeySpecException, KeyManagementException {
         class UnhandleErrorRestTemplate extends RestTemplate {
             public UnhandleErrorRestTemplate() throws IOException, CertificateException, NoSuchAlgorithmException, UnrecoverableKeyException, InvalidKeyException, InvalidAlgorithmParameterException, NoSuchPaddingException, InvalidKeySpecException, KeyManagementException {
