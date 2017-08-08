@@ -1,17 +1,18 @@
 package net.tinybrick.utils.crypto;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.io.UnsupportedEncodingException;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
-
-import org.apache.log4j.Logger;
 
 import static net.tinybrick.utils.crypto.DATA_FORMAT.BASE64;
 import static net.tinybrick.utils.crypto.DATA_FORMAT.HEX;
 
 
 public class SHA1 {
-	private static Logger logger = org.apache.log4j.LogManager.getLogger(SHA1.class);
+	private static Logger logger = LogManager.getLogger(SHA1.class);
 
 	public static String hash(String password) throws UnsupportedEncodingException {
 		return hash(password, false);

@@ -2,7 +2,8 @@ package net.tinybrick.utils.crypto.unit;
 
 import net.tinybrick.utils.crypto.Codec;
 import net.tinybrick.utils.crypto.RSA;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Assert;
 import org.junit.Test;
 
@@ -13,7 +14,7 @@ import java.security.NoSuchAlgorithmException;
  * Created by ji.wang on 2017-05-10.
  */
 public class RSATestCase {
-    private static Logger logger = org.apache.log4j.LogManager.getLogger(RSATestCase.class);
+    private static Logger logger = LogManager.getLogger(RSATestCase.class);
     int keyLength = 1024;
 
     @Test

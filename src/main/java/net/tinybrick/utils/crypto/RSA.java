@@ -1,20 +1,18 @@
 package net.tinybrick.utils.crypto;
 
-import org.apache.log4j.Logger;
+
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
 import javax.crypto.IllegalBlockSizeException;
-import javax.crypto.spec.OAEPParameterSpec;
-import javax.crypto.spec.PSource;
-import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.security.*;
 import java.security.interfaces.RSAPrivateKey;
 import java.security.interfaces.RSAPublicKey;
 import java.security.spec.InvalidKeySpecException;
-import java.security.spec.MGF1ParameterSpec;
 import java.security.spec.PKCS8EncodedKeySpec;
 import java.security.spec.X509EncodedKeySpec;
 import java.util.ArrayList;
@@ -25,7 +23,7 @@ import java.util.List;
  * Created by ji.wang on 2017-05-10.
  */
 public class RSA {
-    private static Logger logger = org.apache.log4j.LogManager.getLogger(RSA.class);
+    private static Logger logger = LogManager.getLogger(RSA.class);
     protected static String xform = "RSA";
     protected static String algorithm = "RSA/ECB/PKCS1Padding";
     //protected static String algorithm = "RSA/ECB/OAEPWithSHA-256AndMGF1Padding";

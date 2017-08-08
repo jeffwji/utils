@@ -8,11 +8,11 @@ import java.util.MissingResourceException;
 import java.util.ResourceBundle;
 
 import net.tinybrick.utils.i18n.I18N;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class PropertyResourceLoader {
-	Logger logger = LoggerFactory.getLogger(getClass());
+	Logger logger = LogManager.getLogger(getClass());
 
 	public PropertyResourceLoader() {
 		this("zh_CN");

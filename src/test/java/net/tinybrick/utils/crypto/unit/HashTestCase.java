@@ -1,12 +1,12 @@
 package net.tinybrick.utils.crypto.unit;
 
 import net.tinybrick.utils.crypto.MD5;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.junit.Test;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 public class HashTestCase {
-	Logger logger = LoggerFactory.getLogger(this.getClass());
+	Logger logger = LogManager.getLogger(this.getClass());
 
 	@Test
 	public void md5Test() {

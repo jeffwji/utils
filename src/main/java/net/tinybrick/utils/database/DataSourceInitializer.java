@@ -2,11 +2,12 @@ package net.tinybrick.utils.database;
 
 import javax.sql.DataSource;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 public class DataSourceInitializer extends org.springframework.jdbc.datasource.init.DataSourceInitializer {
-	Logger logger = Logger.getLogger(this.getClass());
+	Logger logger = LogManager.getLogger(this.getClass());
 
 	JdbcTemplate jdbcTemplate;
 

@@ -1,9 +1,10 @@
 package net.tinybrick.utils.crypto;
 
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class UNHEX {
-	private static Logger logger = org.apache.log4j.LogManager.getLogger(UNHEX.class);
+	private static Logger logger = LogManager.getLogger(UNHEX.class);
 
 	public static String hash(String hex) {
 		StringBuilder sb = new StringBuilder();

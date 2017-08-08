@@ -1,11 +1,12 @@
 package net.tinybrick.utils.crypto;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.security.MessageDigest;
 
-import org.apache.log4j.Logger;
-
 public class MD5 {
-	private static Logger logger = org.apache.log4j.LogManager.getLogger(MD5.class);
+	private static Logger logger = LogManager.getLogger(MD5.class);
 	MessageDigest md;
 
 	public MD5() {

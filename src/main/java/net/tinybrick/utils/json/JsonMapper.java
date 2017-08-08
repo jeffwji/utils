@@ -17,8 +17,8 @@ import org.apache.commons.lang3.StringUtils;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.annotation.JsonInclude.Include;
 import com.fasterxml.jackson.databind.util.JSONPObject;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 /**
  * 简单封装Jackson，实现JSON String<->Java Object的Mapper.
@@ -26,7 +26,7 @@ import org.slf4j.LoggerFactory;
  */
 public class JsonMapper {
 
-    private static Logger logger = LoggerFactory.getLogger(JsonMapper.class);
+    private static Logger logger = LogManager.getLogger(JsonMapper.class);
 
     private ObjectMapper mapper;
 

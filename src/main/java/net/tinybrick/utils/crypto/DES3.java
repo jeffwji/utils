@@ -1,5 +1,8 @@
 package net.tinybrick.utils.crypto;
 
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
+
 import java.security.InvalidAlgorithmParameterException;
 import java.security.InvalidKeyException;
 import java.security.Key;
@@ -19,10 +22,8 @@ import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.PBEParameterSpec;
 
-import org.apache.log4j.Logger;
-
 public class DES3 {
-	private static Logger logger = Logger.getLogger(DES3.class);
+	private static Logger logger = LogManager.getLogger(DES3.class);
 
 	// 算法
 	public static final String KEY_SPEC_PBE_DES = "PBEWithMD5AndDES";

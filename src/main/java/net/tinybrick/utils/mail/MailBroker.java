@@ -11,10 +11,11 @@ import org.apache.commons.mail.Email;
 import org.apache.commons.mail.EmailException;
 import org.apache.commons.mail.HtmlEmail;
 import org.apache.commons.mail.SimpleEmail;
-import org.apache.log4j.Logger;
+import org.apache.logging.log4j.LogManager;
+import org.apache.logging.log4j.Logger;
 
 public class MailBroker {
-	final Logger logger = Logger.getLogger(this.getClass());
+	final Logger logger = LogManager.getLogger(this.getClass());
 
 	String defaultSender = null;
 	String username = null;
