@@ -18,6 +18,7 @@ import javax.crypto.spec.DESedeKeySpec;
 import javax.crypto.spec.IvParameterSpec;
 import javax.crypto.spec.PBEKeySpec;
 import javax.crypto.spec.PBEParameterSpec;
+import java.util.Base64;
 
 import org.apache.log4j.Logger;
 
@@ -189,7 +190,7 @@ public class DES3 {
 		}
 
 		// Encode bytes to base64 to get a string
-		return new sun.misc.BASE64Encoder().encode(enc);
+		return Base64.getEncoder().encodeToString(enc);
 	}
 
 	/**
@@ -235,7 +236,7 @@ public class DES3 {
 				cipher = getCipher(type, secKey, Cipher.DECRYPT_MODE);
 			}
 			// Decode base64 to get bytes
-			@SuppressWarnings("restriction") byte[] dec = new sun.misc.BASE64Decoder().decodeBuffer(str);
+			@SuppressWarnings("restriction") byte[] dec = Base64.getDecoder().decode(str);
 
 			// Decrypt
 			buffer = cipher.doFinal(dec);
@@ -302,7 +303,7 @@ public class DES3 {
 			// Encrypt
 			byte[] enc = ecipher.doFinal(buffer);
 			// Encode bytes to base64 to get a string
-			return new sun.misc.BASE64Encoder().encode(enc);
+			return Base64.getEncoder().encodeToString(enc);
 		}
 		catch (Exception e) {
 			logger.error(e.getMessage(), e);
@@ -358,7 +359,7 @@ public class DES3 {
 			}
 
 			// Decode base64 to get bytes
-			@SuppressWarnings("restriction") byte[] dec = new sun.misc.BASE64Decoder().decodeBuffer(str);
+			@SuppressWarnings("restriction") byte[] dec = Base64.getDecoder().decode(str);
 			// Decrypt
 			byte[] buffer = dcipher.doFinal(dec);
 			// Decode using utf-8
